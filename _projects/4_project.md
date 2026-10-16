@@ -3,6 +3,7 @@ layout: page
 title: Red de sensores para prevención de colapsos
 description: Proyecto de fin de carrera — red ESP32 para monitorear vibraciones estructurales y emitir alertas tempranas.
 img: assets/img/proj_sensores.jpg
+stack: ["ESP32", "FreeRTOS", "DSP", "Wi-Fi mesh", "I2C/SPI/I2S"]
 importance: 4
 category: IoT y sistemas embebidos
 ---

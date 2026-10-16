@@ -3,6 +3,7 @@ layout: page
 title: Placa controladora de grupos semafóricos
 description: Diseño de PCB y firmware C/C++ para controlar hasta 4 grupos semafóricos (Municipalidad de Lima).
 img: assets/img/proj_semaforo.jpg
+stack: ["PCB", "Altium", "C/C++", "JSON", "CBOR"]
 importance: 5
 category: IoT y sistemas embebidos
 ---

@@ -3,6 +3,9 @@ layout: page
 title: Unidad Vial Inteligente (RSU) con NTCIP
 description: Tesis de bachillerato — middleware SNMPv3/NTCIP y enlace V2I para priorizar semáforos a vehículos críticos.
 img: assets/img/proj_rsu.jpg
+stack: ["Raspberry Pi", "SNMPv3", "NTCIP 1202/1211", "MQTT", "Wi-SUN", "Python"]
+featured: true
+featured_order: 1
 importance: 1
 category: IoT y sistemas embebidos
 github: https://github.com/ruribebejarano/ntcip_middleware

@@ -3,6 +3,7 @@ layout: page
 title: Centro de control semafórico SNMP
 description: Supervisión y programación de controladores semafóricos con SNMP v2c, GUI y decodificador BER.
 img: assets/img/proj_snmp.jpg
+stack: ["SNMP v2c", "Python", "Tkinter", "BER/ASN.1", "Raspberry Pi"]
 importance: 2
 category: IoT y sistemas embebidos
 github: https://github.com/ruribebejarano/snmp_interfaz_practice

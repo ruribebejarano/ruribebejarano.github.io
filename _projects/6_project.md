@@ -3,6 +3,9 @@ layout: page
 title: Búsqueda semántica imagen–texto con CLIP
 description: Recuperación bidireccional con CLIP ViT-B/32 en Flickr30k; el fine-tuning sube Recall@1 de 58.8 % a 68.6 %.
 img: assets/img/proj_clip.jpg
+stack: ["PyTorch", "CLIP", "Hugging Face", "Recall@1 68.6%"]
+featured: true
+featured_order: 3
 importance: 1
 category: inteligencia artificial
 github: https://github.com/ruribebejarano/clip-flickr30k-deep-learning

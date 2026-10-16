@@ -3,6 +3,7 @@ layout: page
 title: Conteo de vehículos con YOLOv8
 description: Detección y seguimiento de vehículos en video con YOLOv8 + SORT y métricas de rendimiento.
 img: assets/img/proj_yolo.jpg
+stack: ["YOLOv8", "SORT", "OpenCV", "Python"]
 importance: 2
 category: inteligencia artificial
 github: https://github.com/ruribebejarano/yolo_car

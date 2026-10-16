@@ -3,6 +3,9 @@ layout: page
 title: Controlador Matter sobre ESP32
 description: Control y automatización de una luz Matter en ESP32 con chip-tool y Python; base de un paper en IEEE INTERCON 2026.
 img: assets/img/proj_matter.jpg
+stack: ["ESP32", "Matter", "esp-matter", "chip-tool", "Python"]
+featured: true
+featured_order: 2
 importance: 3
 category: IoT y sistemas embebidos
 github: https://github.com/ruribebejarano/matter-esp32-controller

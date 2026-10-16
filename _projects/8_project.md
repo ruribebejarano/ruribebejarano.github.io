@@ -3,6 +3,7 @@ layout: page
 title: Temperatura crítica de superconductores
 description: Regresión con ensambles (Stacking, XGBoost, Random Forest) sobre 21 263 materiales; R² = 0.93.
 img: assets/img/proj_tc.jpg
+stack: ["Scikit-learn", "XGBoost", "Stacking", "R² 0.93"]
 importance: 3
 category: inteligencia artificial
 github: https://github.com/ruribebejarano/Prediccion-de-la-temperatura-critica-en-superconductores-con-modelos-de-aprendizaje-automatico
