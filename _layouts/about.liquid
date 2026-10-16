@@ -1,0 +1,146 @@
+---
+layout: default
+---
+{%- comment -%} Portada personalizada (tema Tech oscuro). Datos en _pages/about.md {%- endcomment -%}
+{% assign meses = 'ene,feb,mar,abr,may,jun,jul,ago,sep,oct,nov,dic' | split: ',' %}
+<div class="post rx-home">
+  <section class="rx-hero">
+    <div class="rx-hero-text">
+      <p class="rx-kicker"><span class="dot"></span>&gt; hola, mi nombre es</p>
+      <h1 class="rx-name">{{ site.first_name }} <span class="grad">{{ site.last_name }}</span></h1>
+      <p class="rx-typed">// <span class="t" id="rx-typed" data-roles="{{ page.hero.roles | join: '|' }}">{{ page.hero.roles | first }}</span><span class="caret">_</span></p>
+      <p class="rx-lead">{{ page.subtitle }}</p>
+      <div class="rx-cta">
+        <a class="rx-btn primary" href="{{ '/projects/' | relative_url }}"><i class="fa-solid fa-microchip"></i> Ver proyectos</a>
+        <a class="rx-btn" href="{{ '/cv/' | relative_url }}"><i class="fa-regular fa-file-lines"></i> CV</a>
+        {% if site.data.socials.github_username %}<a class="rx-btn icon" href="https://github.com/{{ site.data.socials.github_username }}" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+        {% if site.data.socials.linkedin_username %}<a class="rx-btn icon" href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
+        {% if site.data.socials.email %}<a class="rx-btn icon" href="mailto:{{ site.data.socials.email }}" title="Correo" aria-label="Correo"><i class="fa-solid fa-envelope"></i></a>{% endif %}
+      </div>
+    </div>
+    {% if page.profile.image %}
+      <div class="rx-photo">
+        <div class="inner">
+          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+          {% include figure.liquid loading="eager" path=profile_image_path class="img-fluid" sizes="320px" alt=site.first_name cache_bust=true %}
+        </div>
+        {% if page.hero.badge1 %}<span class="rx-badge b1"><i class="fa-solid fa-location-dot"></i>{{ page.hero.badge1 }}</span>{% endif %}
+        {% if page.hero.badge2 %}<span class="rx-badge b2"><i class="fa-solid fa-flask"></i>{{ page.hero.badge2 }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </section>
+
+  {% if page.hero.stats %}
+    <div class="rx-stats rx-reveal">
+      {% for s in page.hero.stats %}
+        <div class="rx-stat"><div class="n">{{ s.n }}</div><div class="l">{{ s.l }}</div></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <section class="rx-section rx-reveal" id="sobre-mi">
+    <h2 class="rx-h2"><span class="num">01.</span>Sobre mí</h2>
+    <div class="rx-glass rx-about">{{ content }}</div>
+  </section>
+
+  {% if page.stack %}
+    <section class="rx-section rx-reveal" id="stack">
+      <h2 class="rx-h2"><span class="num">02.</span>Stack tecnológico</h2>
+      <div class="rx-stack">
+        {% for g in page.stack %}
+          <div class="grp">
+            <h3><i class="{{ g.icon }}"></i>{{ g.name }}</h3>
+            <ul class="rx-chips">
+              {% for it in g.items %}<li class="rx-chip {{ g.tone }}">{{ it }}</li>{% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% assign featured = site.projects | where: 'featured', true | sort: 'featured_order' %}
+  {% if featured.size > 0 %}
+    <section class="rx-section rx-reveal" id="destacados">
+      <h2 class="rx-h2"><span class="num">03.</span><a href="{{ '/projects/' | relative_url }}">Proyectos destacados</a></h2>
+      <div class="rx-featured">
+        {% for project in featured %}
+          <a href="{{ project.url | relative_url }}">
+            <div class="card hoverable">
+              {% if project.img %}
+                {% include figure.liquid loading="lazy" path=project.img sizes="300px" alt=project.title class="card-img-top" %}
+              {% endif %}
+              <div class="card-body">
+                <h3 class="card-title">{{ project.title }}</h3>
+                <p class="card-text">{{ project.description }}</p>
+                {% if project.stack %}<ul class="rx-chips">{% for t in project.stack limit: 4 %}<li class="rx-chip">{{ t }}</li>{% endfor %}</ul>{% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <a class="rx-more" href="{{ '/projects/' | relative_url }}">ver los {{ site.projects | size }} proyectos →</a>
+    </section>
+  {% endif %}
+
+  {% if page.announcements and page.announcements.enabled and site.news != blank %}
+    <section class="rx-section rx-reveal" id="novedades">
+      <h2 class="rx-h2"><span class="num">04.</span>Novedades</h2>
+      <div class="rx-timeline">
+        {% assign news = site.news | sort: 'date' | reverse %}
+        {% for item in news limit: page.announcements.limit %}
+          {% assign m = item.date | date: '%-m' | minus: 1 %}
+          <div class="rx-tl-item">
+            <div class="rx-tl-date">{{ meses[m] }} {{ item.date | date: '%Y' }}</div>
+            <div class="rx-tl-text">{{ item.content | remove: '<p>' | remove: '</p>' }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if page.selected_papers %}
+    <section class="rx-section rx-reveal" id="publicaciones">
+      <h2 class="rx-h2"><span class="num">05.</span><a href="{{ '/publications/' | relative_url }}">Publicaciones</a></h2>
+      {% include selected_papers.liquid %}
+    </section>
+  {% endif %}
+
+  <section class="rx-section rx-reveal" id="contacto">
+    <div class="rx-glass rx-contact">
+      <p class="rx-kicker mono">06. ¿Qué sigue?</p>
+      <h3>Conversemos</h3>
+      <p>{{ site.contact_note }}</p>
+      <div class="rx-cta">
+        {% if site.data.socials.email %}<a class="rx-btn primary" href="mailto:{{ site.data.socials.email }}"><i class="fa-solid fa-paper-plane"></i> Escríbeme</a>{% endif %}
+        {% if site.data.socials.linkedin_username %}<a class="rx-btn" href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>{% endif %}
+        {% if site.data.socials.github_username %}<a class="rx-btn" href="https://github.com/{{ site.data.socials.github_username }}"><i class="fa-brands fa-github"></i> GitHub</a>{% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    document.documentElement.classList.add("rx-js");
+    var els = document.querySelectorAll(".rx-reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    } else { els.forEach(function (el) { el.classList.add("in"); }); }
+
+    var t = document.getElementById("rx-typed");
+    if (!t || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var roles = (t.getAttribute("data-roles") || "").split("|").filter(Boolean);
+    if (roles.length < 2) return;
+    var i = 0, j = roles[0].length, del = true;
+    function tick() {
+      var r = roles[i];
+      if (del) { j--; t.textContent = r.slice(0, j); if (j <= 0) { del = false; i = (i + 1) % roles.length; } setTimeout(tick, 35); }
+      else { j++; t.textContent = roles[i].slice(0, j); if (j >= roles[i].length) { del = true; setTimeout(tick, 2200); } else setTimeout(tick, 70); }
+    }
+    setTimeout(tick, 2200);
+  })();
+</script>
