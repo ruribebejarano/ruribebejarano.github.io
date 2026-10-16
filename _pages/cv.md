@@ -14,12 +14,12 @@ Lima, Perú · [ruribebejarano@gmail.com](mailto:ruribebejarano@gmail.com) · [L
 
 ## Educación
 
-**Ingeniería Electrónica** — Pontificia Universidad Católica del Perú, Lima
+**Ingeniería Electrónica** — Pontificia Universidad Católica del Perú, Lima<br>
 _Egreso previsto: diciembre 2026_
 
 ## Experiencia
 
-**Practicante pre-profesional** — Laboratorio de Investigación en Biomecánica y Robótica Aplicada (LIBRA), PUCP
+**Practicante pre-profesional** — Laboratorio de Investigación en Biomecánica y Robótica Aplicada (LIBRA), PUCP<br>
 _Jul. 2026 – actualidad_
 
 - Instalación, mantenimiento preventivo y actualización del inventario de equipos electromecánicos.
@@ -27,14 +27,14 @@ _Jul. 2026 – actualidad_
 - Diseño CAD, reactivación de prototipos/sensores y elaboración de manuales técnicos de mantenimiento y uso.
 - Apoyo en redacción de artículos científicos y protocolos ante el Comité de Ética de la Investigación de la PUCP.
 
-**Diseño e implementación de sistema electrónico** — Municipalidad Metropolitana de Lima
+**Diseño e implementación de sistema electrónico** — Municipalidad Metropolitana de Lima<br>
 _Abr. 2025 – ago. 2025_
 
 - Diseño y fabricación de una placa electrónica para el control de hasta 4 grupos semafóricos.
 - Firmware en C/C++ para la gestión de entradas y salidas digitales.
 - Aplicación de configuración en PC con estructuras JSON y codificación CBOR.
 
-**Asistencia técnica en ingeniería** — Municipalidad Metropolitana de Lima
+**Asistencia técnica en ingeniería** — Municipalidad Metropolitana de Lima<br>
 _Dic. 2024 – mar. 2025_
 
 - Análisis y mejora de procesos de la plataforma de fiscalización electrónica "Lima Reporta".
