@@ -1,81 +1,30 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: Centro de control semafórico SNMP
+description: Supervisión y programación de controladores semafóricos con SNMP v2c, GUI y decodificador BER.
+img: assets/img/proj_snmp.jpg
 importance: 2
-category: work
-giscus_comments: true
+category: IoT y sistemas embebidos
+github: https://github.com/ruribebejarano/snmp_interfaz_practice
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+**Proyecto compañero de la tesis** · [Código en GitHub](https://github.com/ruribebejarano/snmp_interfaz_practice)
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+Sistema de supervisión y programación de **controladores semafóricos** (Raspberry Pi) desde un PC usando exclusivamente **SNMP v2c sobre UDP**. El modelo de intersección sigue las tablas de un manual de programación de controladores de tránsito (cruce de ejemplo E06-01).
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm-10 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/snmp_gui.png" title="Ventana principal del centro de control" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-```
+<div class="caption">Interfaz del centro de control (Tkinter): operación, fases, planes, horarios, tráfico SNMP y árbol MIB.</div>
 
-{% endraw %}
+### Características
+
+- Agente SNMP en Raspberry Pi con **MIB privada** y máquina de estados del controlador (alarmas, fases, planes, horarios).
+- GUI completa con pestañas de operación, fases y grupos, planes, horarios, tráfico SNMP y árbol MIB.
+- **Trazas educativas**: cada `GET`, `GETNEXT`, `SET` o `WALK` se desglosa para ver qué ocurre en la red.
+- **Decodificador BER byte a byte** de cada mensaje (RFC 3417).
+- Control opcional de LEDs por GPIO para simular el semáforo físico.
+
+**Tecnologías:** Python · pysnmp · Tkinter · SNMP v2c · BER/ASN.1 · Raspberry Pi · gpiozero

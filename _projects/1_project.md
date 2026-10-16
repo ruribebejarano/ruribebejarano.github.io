@@ -1,81 +1,39 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: Unidad Vial Inteligente (RSU) con NTCIP
+description: Tesis de bachillerato — middleware SNMPv3/NTCIP y enlace V2I para priorizar semáforos a vehículos críticos.
+img: assets/img/proj_rsu.jpg
 importance: 1
-category: work
-related_publications: true
+category: IoT y sistemas embebidos
+github: https://github.com/ruribebejarano/ntcip_middleware
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+**Tesis de bachillerato · ago. 2025 – actualidad** · [Código en GitHub](https://github.com/ruribebejarano/ntcip_middleware)
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+Diseño de una **Unidad Vial Inteligente (RSU, _Roadside Unit_) de hardware abierto** para comunicación **V2I** (vehículo–infraestructura) de baja latencia, orientada a vehículos críticos: transporte público y unidades de emergencia. La RSU actúa como middleware entre el centro de control, el controlador de tránsito y los vehículos.
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm-10 mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/rsu_panel.png" title="Panel de supervisión del centro de control" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-```
+<div class="caption">Panel de supervisión: estado del semáforo y <code>priorityRequestTable</code> (NTCIP 1211) consultados por SNMPv3 sobre la Raspberry Pi.</div>
 
-{% endraw %}
+### Qué hace
+
+- **Centro de control ↔ RSU (SNMPv3, USM):** monitoreo continuo y comandos `GET`/`SET` sobre objetos NTCIP 1202/1211 para **priorización dinámica de semáforos** (TSP/EVP).
+- **RSU → controlador:** adaptador que solicita forzar o liberar la fase verde a un controlador de tránsito (emulado en el banco de pruebas).
+- **OBU → RSU (V2I sobre MQTT):** una OBU simulada publica la solicitud de prioridad cuando el vehículo entra en una geocerca alrededor de la línea de detención.
+- **Propagación entre intersecciones:** diseño de red de malla **Wi-SUN (IEEE 802.15.4g)** para alertas de emergencia en cascada.
+
+### Arquitectura del banco de pruebas
+
+| Proceso | Máquina | Rol |
+| :--- | :--- | :--- |
+| `controller_emulator.py` | Raspberry Pi | Controlador de tránsito (emulado) |
+| `rsu_middleware.py` | Raspberry Pi | Agente SNMPv3 + adaptador + suscriptor V2I |
+| `mosquitto` | Raspberry Pi | Broker MQTT (canal V2I) |
+| `software_gestion.py` | PC | Centro de control: monitoreo y comandos |
+| `obu_simulator.py` | PC | OBU simulada |
+
+**Tecnologías:** Python · pysnmp · SNMPv3 · NTCIP 1202/1211 · MQTT · Raspberry Pi · LaunchPad TI · Wi-SUN
