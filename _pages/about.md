@@ -1,34 +1,33 @@
 ---
 layout: about
-title: about
+title: sobre mí
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Estudiante de Ingeniería Electrónica · <a href='https://www.pucp.edu.pe/'>PUCP</a> · Sistemas embebidos, IoT industrial y transporte inteligente
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Lima, Perú</p>
+    <p>Practicante pre-profesional en LIBRA-PUCP</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+selected_papers: true
+social: true
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  enabled: true
+  scrollable: true
+  limit: 5
 
 latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  enabled: false
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Soy estudiante de **Ingeniería Electrónica** en la Pontificia Universidad Católica del Perú (egreso previsto: diciembre 2026). Me interesa la **integración hardware–software** para entornos de operación crítica: firmware en C/C++ para **ESP32** (ESP-IDF, FreeRTOS), diseño de **PCBs** (Altium Designer, EasyEDA) y redes inalámbricas para **IoT industrial** (Wi-Fi mesh, LoRa, Wi-SUN).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Actualmente soy practicante en el **Laboratorio de Investigación en Biomecánica y Robótica Aplicada (LIBRA-PUCP)** y desarrollo mi tesis de bachillerato: una **Unidad Vial Inteligente (RSU)** con middleware **SNMPv3/NTCIP** para la priorización semafórica de transporte público y vehículos de emergencia (V2I). Antes trabajé en la **Municipalidad Metropolitana de Lima** diseñando una placa de control para grupos semafóricos y automatizando reportes técnicos.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+También aplico **aprendizaje automático** a problemas reales: búsqueda semántica imagen–texto con CLIP, conteo de vehículos con YOLO y regresión con ensambles para ciencia de materiales.
+
+**Áreas de interés:** IoT industrial · sistemas distribuidos · edge computing · sistemas de transporte inteligente (ITS) · Edge AI.

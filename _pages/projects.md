@@ -1,11 +1,11 @@
 ---
 layout: page
-title: projects
+title: proyectos
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: Proyectos de sistemas embebidos, IoT, transporte inteligente y aprendizaje automático.
 nav: true
-nav_order: 3
-display_categories: [work, fun]
+nav_order: 1
+display_categories: [IoT y sistemas embebidos, inteligencia artificial]
 horizontal: false
 ---
 
