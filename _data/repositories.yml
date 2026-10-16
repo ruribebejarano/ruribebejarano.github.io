@@ -1,14 +1,12 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - ruribebejarano
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - ruribebejarano/ntcip_middleware
+  - ruribebejarano/snmp_interfaz_practice
+  - ruribebejarano/matter-esp32-controller
+  - ruribebejarano/clip-flickr30k-deep-learning
+  - ruribebejarano/yolo_car
+  - ruribebejarano/Prediccion-de-la-temperatura-critica-en-superconductores-con-modelos-de-aprendizaje-automatico
