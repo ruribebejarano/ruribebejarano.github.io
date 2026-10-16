@@ -23,5 +23,10 @@ module.exports = {
     // and page chrome (scroll-progress bar, ToC) bleeds through a zoomed image.
     "medium-zoom-overlay",
     "medium-zoom-image--opened",
+    // tema personalizado: elementos/clases agregados por JavaScript
+    "back-to-top",
+    "rx-js",
+    "rx-reveal",
+    "in",
   ],
 };
