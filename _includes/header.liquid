@@ -1,0 +1,83 @@
+{%- comment -%} Barra de navegación bilingüe (ES/EN). Textos en _data/ui.yml {%- endcomment -%}
+{%- assign lang = page.lang | default: 'es' -%}
+{%- assign t = site.data.ui[lang] -%}
+{%- if lang == 'en' -%}
+  {%- assign alt_url = page.url | remove_first: '/en' -%}
+  {%- if alt_url == '' -%}{%- assign alt_url = '/' -%}{%- endif -%}
+  {%- assign home_url = '/en/' -%}
+{%- else -%}
+  {%- assign alt_url = page.url | prepend: '/en' -%}
+  {%- assign home_url = '/' -%}
+{%- endif -%}
+{%- if page.alt_url -%}{%- assign alt_url = page.alt_url -%}{%- endif -%}
+<header>
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
+    <div class="container">
+      {% if page.layout != 'about' %}
+        <a class="navbar-brand title font-weight-lighter" href="{{ home_url | relative_url }}">
+          <span class="font-weight-bold">{{- site.first_name -}}</span>
+          {{ site.last_name }}
+        </a>
+      {% endif %}
+      <button
+        class="navbar-toggler collapsed navbar-toggler-main"
+        type="button"
+        data-nav-toggle="navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav">
+        <ul class="navbar-nav navbar-menu-list flex-nowrap">
+          {% for item in t.nav %}
+            {% if item.root %}
+              {% if page.url == item.url %}{% assign is_active = true %}{% else %}{% assign is_active = false %}{% endif %}
+            {% else %}
+              {% if page.url contains item.url %}{% assign is_active = true %}{% else %}{% assign is_active = false %}{% endif %}
+            {% endif %}
+            <li class="nav-item {% if is_active %}active{% endif %}">
+              <a class="nav-link" href="{{ item.url | relative_url }}">
+                {{- item.title -}}
+                {% if is_active %}<span class="sr-only">(current)</span>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+          {% if site.search_enabled %}
+            <li class="nav-item">
+              <button id="search-toggle" type="button" title="Search" aria-label="Open search">
+                <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span>
+              </button>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link rx-lang" href="{{ alt_url | relative_url }}" title="{{ t.switch_title }}" hreflang="{% if lang == 'en' %}es{% else %}en{% endif %}">
+              <i class="fa-solid fa-globe"></i> {{ t.switch_label }}
+            </a>
+          </li>
+          {% if site.enable_darkmode %}
+            <li class="toggle-container">
+              <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme">
+                <i class="fa-half-sun-moon" id="light-toggle-system"></i>
+                <i class="fa-solid fa-moon" id="light-toggle-dark"></i>
+                <i class="fa-solid fa-sun" id="light-toggle-light"></i>
+              </button>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% if site.enable_progressbar %}
+    <progress id="progress" value="0">
+      <div class="progress-container">
+        <span class="progress-bar"></span>
+      </div>
+    </progress>
+  {% endif %}
+</header>
