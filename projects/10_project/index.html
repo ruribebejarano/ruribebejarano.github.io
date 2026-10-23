@@ -1,0 +1,211 @@
+<!DOCTYPE html> <html lang="es"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Robot autobalanceado con control LQR | Ricardo Uribe Bejarano </title> <meta name="author" content="Ricardo Uribe Bejarano"> <meta name="description" content="Péndulo invertido sobre dos ruedas con ESP32, estimación por filtro de Kalman y control óptimo LQR diseñado en MATLAB."> <meta name="keywords" content="ingeniería electrónica, sistemas embebidos, IoT, ESP32, NTCIP, SNMP, V2I, Matter, machine learning, PUCP"> <meta property="og:site_name" content="Ricardo Uribe Bejarano"> <meta property="og:type" content="website"> <meta property="og:title" content="Ricardo Uribe Bejarano | Robot autobalanceado con control LQR"> <meta property="og:url" content="https://ruribebejarano.github.io/projects/10_project/"> <meta property="og:description" content="Péndulo invertido sobre dos ruedas con ESP32, estimación por filtro de Kalman y control óptimo LQR diseñado en MATLAB."> <meta property="og:image" content="https://ruribebejarano.github.io/assets/img/proj_rsu.jpg"> <meta property="og:locale" content="es"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Robot autobalanceado con control LQR"> <meta name="twitter:description" content="Péndulo invertido sobre dos ruedas con ESP32, estimación por filtro de Kalman y control óptimo LQR diseñado en MATLAB."> <meta name="twitter:image" content="https://ruribebejarano.github.io/assets/img/proj_rsu.jpg"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%A1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://ruribebejarano.github.io/projects/10_project/"> <script src="/assets/js/theme.js?v=9a9927387859a9ddfdb1d05868f51ad8"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Ricardo</span> Uribe Bejarano </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">sobre mí </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">proyectos<span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publicaciones </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositorios </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="nav-item"> <a class="nav-link rx-lang" href="/en/projects/10_project/" title="Read in English" hreflang="en"> <i class="fa-solid fa-globe"></i> EN </a> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Robot autobalanceado con control LQR</h1> <p class="post-description">Péndulo invertido sobre dos ruedas con ESP32, estimación por filtro de Kalman y control óptimo LQR diseñado en MATLAB.</p> </header> <article> <p><strong>Control moderno · Proyecto académico · ESP32 + MATLAB</strong></p> <p>Robot de dos ruedas que se mantiene en equilibrio por sí mismo: un <strong>péndulo invertido sobre ruedas</strong>. Es un sistema <strong>inestable en lazo abierto</strong> y <strong>subactuado</strong> (dos motores deben controlar a la vez el ángulo del cuerpo y la posición del robot), por lo que es un caso clásico para aplicar <strong>control en espacio de estados</strong> con un regulador óptimo <strong>LQR</strong>.</p> <div class="row justify-content-sm-center"> <div class="col-sm-9 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/lqr_robot-480.webp 480w,/assets/img/lqr_robot-800.webp 800w,/assets/img/lqr_robot-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/lqr_robot.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Robot autobalanceado" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption">Prototipo: chasis de tres niveles con varillas roscadas, dos motorreductores DC con encoder, paquete de baterías y la electrónica de control en la parte superior.</div> <h3 id="1-modelado-matemático">1. Modelado matemático</h3> <p>El robot se modela como un cuerpo (péndulo) articulado sobre el eje de dos ruedas. Con las ecuaciones de <strong>Euler-Lagrange</strong> (o Newton) se obtienen las ecuaciones no lineales del movimiento, incluyendo la dinámica de los motores DC (constante de torque \(K_t\), constante de fuerza contraelectromotriz \(K_e\) y resistencia de armadura \(R_a\)), de modo que la entrada sea el <strong>voltaje</strong> aplicado.</p> <p>Se elige el vector de estados</p> \[\mathbf{x} = \begin{bmatrix} x &amp; \dot{x} &amp; \theta &amp; \dot{\theta} \end{bmatrix}^T\] <p>donde \(x\) es la posición de las ruedas y \(\theta\) la inclinación del cuerpo. Linealizando alrededor del punto de equilibrio vertical (\(\theta = 0\)) se llega al modelo</p> \[\dot{\mathbf{x}} = A\,\mathbf{x} + B\,u, \qquad y = C\,\mathbf{x}\] <h3 id="2-identificación-de-parámetros">2. Identificación de parámetros</h3> <p>El modelo solo es útil si sus parámetros son reales:</p> <ul> <li> <strong>Masas</strong> del cuerpo y de las ruedas, <strong>radio</strong> de rueda y <strong>altura del centro de masa</strong>.</li> <li> <strong>Momento de inercia</strong> del cuerpo (por ejemplo, con un ensayo de péndulo).</li> <li> <strong>Parámetros del motor</strong> a partir de la respuesta al escalón y de mediciones de corriente y velocidad, incluyendo la <strong>zona muerta</strong> del motorreductor.</li> </ul> <h3 id="3-análisis-del-sistema">3. Análisis del sistema</h3> <ul> <li>Los <strong>autovalores</strong> de \(A\) muestran un polo en el semiplano derecho: el sistema es inestable sin control.</li> <li>Se verifica la <strong>controlabilidad</strong> con \(\operatorname{rank}\,[B \;\; AB \;\; A^2B \;\; A^3B] = 4\) y la <strong>observabilidad</strong> con las salidas medidas (ángulo y encoders).</li> </ul> <h3 id="4-diseño-del-controlador-lqr">4. Diseño del controlador LQR</h3> <p>El LQR calcula la ganancia de realimentación \(u = -K\mathbf{x}\) que minimiza</p> \[J = \int_0^{\infty} \left( \mathbf{x}^T Q\, \mathbf{x} + u^T R\, u \right) dt\] <p>resolviendo la <strong>ecuación algebraica de Riccati</strong>, con \(K = R^{-1}B^T P\). La matriz \(Q\) penaliza el error en cada estado (sobre todo \(\theta\) y \(\dot{\theta}\)) y \(R\) el esfuerzo de control; un buen punto de partida es la <strong>regla de Bryson</strong> y luego se ajustan experimentalmente. A diferencia de un PID por lazo, el LQR controla <strong>todos los estados a la vez</strong>, equilibrando ángulo y posición en una sola ley de control.</p> <p>La ganancia \(K\) se calcula en <strong>MATLAB</strong> (<code class="language-plaintext highlighter-rouge">lqr</code> / <code class="language-plaintext highlighter-rouge">dlqr</code>). Como el control corre en el <strong>ESP32</strong>, el modelo se <strong>discretiza</strong> con el periodo de muestreo \(T_s\) y se usa la versión discreta del LQR.</p> <h3 id="5-estimación-de-estados">5. Estimación de estados</h3> <p>No todos los estados se miden directamente, así que se estiman:</p> <ul> <li> <strong>Ángulo \(\theta\)</strong>: fusión del acelerómetro (preciso a largo plazo, ruidoso) y del giroscopio (preciso a corto plazo, con deriva) mediante un <strong>filtro de Kalman</strong>, que estima el ángulo y compensa la deriva del giroscopio.</li> <li> <strong>Velocidad angular \(\dot{\theta}\)</strong>: directamente del giroscopio.</li> <li> <strong>Posición y velocidad \(x, \dot{x}\)</strong>: a partir de los <strong>encoders</strong> de las ruedas.</li> </ul> <h3 id="6-simulación">6. Simulación</h3> <p>Antes de tocar el hardware, el controlador se prueba en simulación en <strong>MATLAB/Simulink</strong> sobre el <strong>modelo no lineal</strong>, incluyendo saturación del voltaje, ruido de los sensores, retardo de muestreo y perturbaciones, para validar las ganancias y la robustez.</p> <h3 id="7-implementación-embebida-en-el-esp32">7. Implementación embebida en el ESP32</h3> <ul> <li> <strong>Lazo de control a frecuencia fija</strong> con interrupción de temporizador.</li> <li>Lectura de la <strong>IMU por I2C</strong> y de los <strong>encoders por interrupciones</strong>.</li> <li>Cálculo de \(u = -K\mathbf{x}\), <strong>compensación de la zona muerta</strong>, <strong>saturación</strong> y salida <strong>PWM</strong> al puente H.</li> <li> <strong>Parada de seguridad</strong> cuando la inclinación supera un límite.</li> <li> <strong>Telemetría</strong> de los estados para ajustar \(Q\) y \(R\) con datos reales.</li> </ul> <h3 id="8-pruebas-y-ajuste">8. Pruebas y ajuste</h3> <p>Se evalúa el equilibrio estático, la respuesta ante empujones (perturbaciones) y el comportamiento al desplazarse, ajustando \(Q\) y \(R\) hasta lograr un compromiso entre estabilidad, rapidez de respuesta y consumo de los motores.</p> <h3 id="mi-aporte">Mi aporte</h3> <ul> <li> <strong>Modelado y diseño del controlador LQR en MATLAB</strong>, incluida la simulación del modelo no lineal.</li> <li> <strong>Programación embebida en el ESP32</strong>: lazo de control en tiempo real, lectura de la IMU y los encoders, <strong>filtro de Kalman</strong> y salida PWM a los motores.</li> <li>Ajuste experimental de \(Q\) y \(R\) en el prototipo.</li> </ul> <p><strong>Tecnologías:</strong> ESP32 · C/C++ · Control en espacio de estados · LQR · Filtro de Kalman · IMU · Encoders · PWM · MATLAB/Simulink</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Ricardo Uribe Bejarano. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-sobre-mí",
+    title: "sobre mí",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-proyectos",
+          title: "proyectos",
+          description: "Proyectos de sistemas embebidos, IoT, transporte inteligente y aprendizaje automático.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publicaciones",
+          title: "publicaciones",
+          description: "Artículos científicos en orden cronológico inverso.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-repositorios",
+          title: "repositorios",
+          description: "Mi perfil y repositorios públicos en GitHub.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Formación, experiencia y competencias técnicas.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "news-comencé-mi-tesis-de-bachillerato-unidad-vial-inteligente-rsu-con-middleware-ntcip-y-comunicación-v2i-para-priorización-semafórica-de-vehículos-críticos",
+          title: 'Comencé mi tesis de bachillerato: Unidad Vial Inteligente (RSU) con middleware NTCIP y...',
+          description: "",
+          section: "News",},{id: "news-inicié-mis-prácticas-pre-profesionales-en-el-laboratorio-de-investigación-en-biomecánica-y-robótica-aplicada-libra-pucp",
+          title: 'Inicié mis prácticas pre-profesionales en el Laboratorio de Investigación en Biomecánica y Robótica...',
+          description: "",
+          section: "News",},{id: "news-dos-artículos-aceptados-en-ieee-intercon-2026-upao-trujillo-semáforo-inteligente-con-doble-radar-y-evaluación-de-matter-multi-admin-sobre-esp32",
+          title: 'Dos artículos aceptados en IEEE INTERCON 2026 (UPAO, Trujillo): semáforo inteligente con doble...',
+          description: "",
+          section: "News",},{id: "projects-robot-autobalanceado-con-control-lqr",
+          title: 'Robot autobalanceado con control LQR',
+          description: "Péndulo invertido sobre dos ruedas con ESP32, estimación por filtro de Kalman y control óptimo LQR diseñado en MATLAB.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_project/";
+            },},{id: "projects-unidad-vial-inteligente-rsu-con-ntcip",
+          title: 'Unidad Vial Inteligente (RSU) con NTCIP',
+          description: "Tesis de bachillerato — middleware SNMPv3/NTCIP y enlace V2I para priorizar semáforos a vehículos críticos.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-centro-de-control-semafórico-snmp",
+          title: 'Centro de control semafórico SNMP',
+          description: "Supervisión y programación de controladores semafóricos con SNMP v2c, GUI y decodificador BER.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-controlador-matter-sobre-esp32",
+          title: 'Controlador Matter sobre ESP32',
+          description: "Control y automatización de una luz Matter en ESP32 con chip-tool y Python; base de un paper en IEEE INTERCON 2026.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-pachanet-monitoreo-inalámbrico-de-vibraciones",
+          title: 'Pachanet: monitoreo inalámbrico de vibraciones',
+          description: "Proyecto de fin de carrera — nodos ESP32 en red mesh que detectan vibraciones estructurales y emiten alertas para prevenir colapsos.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-controlador-semafórico-de-4-fases",
+          title: 'Controlador semafórico de 4 fases',
+          description: "PCB con ATmega328P, RTC, salidas por triac con optoaislamiento y monitoreo de verdes para controlar hasta 4 grupos semafóricos (Municipalidad de Lima).",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-búsqueda-semántica-imagen-texto-con-clip",
+          title: 'Búsqueda semántica imagen–texto con CLIP',
+          description: "Recuperación bidireccional con CLIP ViT-B/32 en Flickr30k; el fine-tuning sube Recall@1 de 58.8 % a 68.6 %.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-conteo-de-vehículos-con-yolov8",
+          title: 'Conteo de vehículos con YOLOv8',
+          description: "Detección y seguimiento de vehículos en video con YOLOv8 + SORT y métricas de rendimiento.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-temperatura-crítica-de-superconductores",
+          title: 'Temperatura crítica de superconductores',
+          description: "Regresión con ensambles (Stacking, XGBoost, Random Forest) sobre 21 263 materiales; R² = 0.93.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-robot-móvil-autónomo-con-control-pid",
+          title: 'Robot móvil autónomo con control PID',
+          description: "Robot basado en ESP32 que recorre un laberinto con control PID de velocidad por encoders y telemetría MQTT.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "projects-self-balancing-robot-with-lqr-control",
+          title: 'Self-balancing robot with LQR control',
+          description: "Two-wheeled inverted pendulum with an ESP32, Kalman-filter state estimation and optimal LQR control designed in MATLAB.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/10_project/";
+            },},{id: "projects-intelligent-roadside-unit-rsu-with-ntcip",
+          title: 'Intelligent Roadside Unit (RSU) with NTCIP',
+          description: "Bachelor&#39;s thesis — SNMPv3/NTCIP middleware and V2I link to give traffic-signal priority to critical vehicles.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/1_project/";
+            },},{id: "projects-snmp-traffic-signal-control-center",
+          title: 'SNMP traffic-signal control center',
+          description: "Supervision and programming of traffic-signal controllers over SNMP v2c, with a GUI and a BER decoder.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/2_project/";
+            },},{id: "projects-matter-controller-on-esp32",
+          title: 'Matter controller on ESP32',
+          description: "Control and automation of a Matter light on an ESP32 with chip-tool and Python; basis for an IEEE INTERCON 2026 paper.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/3_project/";
+            },},{id: "projects-pachanet-wireless-vibration-monitoring",
+          title: 'Pachanet: wireless vibration monitoring',
+          description: "Capstone project — ESP32 nodes on a mesh network that detect structural vibrations and raise alerts to help prevent collapses.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/4_project/";
+            },},{id: "projects-4-phase-traffic-signal-controller",
+          title: '4-phase traffic-signal controller',
+          description: "PCB with an ATmega328P, RTC, opto-isolated triac outputs and green-signal monitoring to drive up to 4 signal groups (Municipality of Lima).",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/5_project/";
+            },},{id: "projects-image-text-semantic-search-with-clip",
+          title: 'Image–text semantic search with CLIP',
+          description: "Bidirectional retrieval with CLIP ViT-B/32 on Flickr30k; fine-tuning raises Recall@1 from 58.8 % to 68.6 %.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/6_project/";
+            },},{id: "projects-vehicle-counting-with-yolov8",
+          title: 'Vehicle counting with YOLOv8',
+          description: "Vehicle detection and tracking in video with YOLOv8 + SORT and performance metrics.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/7_project/";
+            },},{id: "projects-superconductor-critical-temperature",
+          title: 'Superconductor critical temperature',
+          description: "Ensemble regression (Stacking, XGBoost, Random Forest) on 21,263 materials; R² = 0.93.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/8_project/";
+            },},{id: "projects-autonomous-mobile-robot-with-pid-control",
+          title: 'Autonomous mobile robot with PID control',
+          description: "ESP32-based robot that navigates a maze with encoder-based PID speed control and MQTT telemetry.",
+          section: "Projects",handler: () => {
+              window.location.href = "/en/projects/9_project/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%72%75%72%69%62%65%62%65%6A%61%72%61%6E%6F@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/ruribebejarano", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/ricardo-uribe-bejarano", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
