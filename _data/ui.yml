@@ -1,0 +1,53 @@
+# Textos de la interfaz en español (es) e inglés (en)
+es:
+  switch_label: EN
+  switch_title: Read in English
+  nav:
+    - { title: sobre mí, url: /, root: true }
+    - { title: proyectos, url: /projects/ }
+    - { title: publicaciones, url: /publications/ }
+    - { title: repositorios, url: /repositories/ }
+    - { title: CV, url: /cv/ }
+  kicker: "> hola, mi nombre es"
+  btn_projects: Ver proyectos
+  btn_cv: CV
+  email: Correo
+  s_about: Sobre mí
+  s_stack: Stack tecnológico
+  s_featured: Proyectos destacados
+  s_exp: Experiencia
+  s_news: Novedades
+  s_pubs: Publicaciones
+  see_all: "ver los NUM proyectos →"
+  next: "07. ¿Qué sigue?"
+  talk: Conversemos
+  write_me: Escríbeme
+  contact_note: La mejor forma de contactarme es por correo o LinkedIn.
+  months: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+  repo: Repositorio
+en:
+  switch_label: ES
+  switch_title: Leer en español
+  nav:
+    - { title: about, url: /en/, root: true }
+    - { title: projects, url: /en/projects/ }
+    - { title: publications, url: /en/publications/ }
+    - { title: repositories, url: /en/repositories/ }
+    - { title: CV, url: /en/cv/ }
+  kicker: "> hi, my name is"
+  btn_projects: See projects
+  btn_cv: Resume
+  email: Email
+  s_about: About me
+  s_stack: Tech stack
+  s_featured: Featured projects
+  s_exp: Experience
+  s_news: News
+  s_pubs: Publications
+  see_all: "see all NUM projects →"
+  next: "07. What's next?"
+  talk: Let's talk
+  write_me: Email me
+  contact_note: The best way to reach me is by email or LinkedIn.
+  months: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  repo: Repository
