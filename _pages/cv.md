@@ -58,7 +58,7 @@ Coautor de dos artículos aceptados en **IEEE INTERCON 2026** (UPAO, Trujillo). 
 | Sistemas embebidos | ESP32, ESP-IDF, FreeRTOS, Raspberry Pi, ATmega328P |
 | Comunicaciones y protocolos | UART, SPI, I2C, I2S, Wi-Fi / Wi-Fi mesh, LoRa, ESP-NOW, Wi-SUN, Matter, SNMP, NTCIP, MQTT, JSON, CBOR |
 | Diseño de hardware | PCBs (Altium Designer, EasyEDA), soldadura SMD/THT, RS-232/RS-485 |
-| Control | PID, espacio de estados, LQR, filtro de Kalman, MATLAB/Simulink |
+| Control | Espacio de estados, LQR, filtro de Kalman, MATLAB/Simulink |
 | Programación | Python, C/C++, C#, Git/GitHub, Ladder |
 | Bases de datos y BI | SQL, Power BI, Excel (macros/VBA), Looker Studio, Google Sheets |
 | Datos e IA | NumPy, Pandas, Scikit-learn, TensorFlow, Keras, PyTorch |

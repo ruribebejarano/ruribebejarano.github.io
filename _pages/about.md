@@ -15,12 +15,12 @@ hero:
     - IoT industrial · Wi-SUN · LoRa
     - Transporte inteligente · NTCIP · V2I
     - Diseño de PCBs
-    - Control PID y LQR · Robótica
+    - Control óptimo LQR · Robótica
     - Machine learning aplicado
   badge1: Lima, Perú
   badge2: LIBRA · PUCP
   stats:
-    - n: "10"
+    - n: "9"
       l: proyectos
     - n: "2"
       l: papers IEEE INTERCON 2026
@@ -49,7 +49,7 @@ stack:
   - name: Control y robótica
     icon: fa-solid fa-robot
     tone: p
-    items: [PID, Espacio de estados, LQR, Filtro de Kalman, MATLAB/Simulink, ESP32]
+    items: [Espacio de estados, LQR, Filtro de Kalman, MATLAB/Simulink, ESP32]
   - name: Inteligencia artificial
     icon: fa-solid fa-brain
     tone: v
@@ -92,4 +92,4 @@ Soy estudiante de **Ingeniería Electrónica** en la Pontificia Universidad Cat�
 
 Actualmente soy practicante en el **Laboratorio de Investigación en Biomecánica y Robótica Aplicada (LIBRA-PUCP)** y desarrollo mi tesis de bachillerato: una **Unidad Vial Inteligente (RSU)** con middleware **SNMPv3/NTCIP** para la priorización semafórica de transporte público y vehículos de emergencia (V2I). Antes trabajé en la **Municipalidad Metropolitana de Lima** diseñando una placa de control para grupos semafóricos y automatizando reportes técnicos.
 
-También aplico **aprendizaje automático** a problemas reales: búsqueda semántica imagen–texto con CLIP, conteo de vehículos con YOLO y regresión con ensambles para ciencia de materiales.
+También aplico **control moderno** (espacio de estados, LQR, filtro de Kalman) a la robótica y **aprendizaje automático** a problemas reales: búsqueda semántica imagen–texto con CLIP, conteo de vehículos con YOLO y regresión con ensambles para ciencia de materiales.

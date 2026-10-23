@@ -16,12 +16,12 @@ hero:
     - Industrial IoT · Wi-SUN · LoRa
     - Intelligent transportation · NTCIP · V2I
     - PCB design
-    - PID & LQR control · Robotics
+    - LQR optimal control · Robotics
     - Applied machine learning
   badge1: Lima, Peru
   badge2: LIBRA · PUCP
   stats:
-    - n: "10"
+    - n: "9"
       l: projects
     - n: "2"
       l: IEEE INTERCON 2026 papers
@@ -50,7 +50,7 @@ stack:
   - name: Control & robotics
     icon: fa-solid fa-robot
     tone: p
-    items: [PID, State space, LQR, Kalman filter, MATLAB/Simulink, ESP32]
+    items: [State space, LQR, Kalman filter, MATLAB/Simulink, ESP32]
   - name: Artificial intelligence
     icon: fa-solid fa-brain
     tone: v
@@ -93,4 +93,4 @@ I am an **Electronic Engineering** student at the Pontifical Catholic University
 
 I am currently an intern at the **Biomechanics and Applied Robotics Research Laboratory (LIBRA-PUCP)** and I am working on my bachelor's thesis: an **Intelligent Roadside Unit (RSU)** with **SNMPv3/NTCIP** middleware that gives traffic-signal priority to public transport and emergency vehicles (V2I). Before that, I worked at the **Metropolitan Municipality of Lima**, designing a control board for traffic-signal groups and automating technical reports.
 
-I also apply **control theory** (PID, state space, LQR) to robotics and **machine learning** to real problems: image–text semantic search with CLIP, vehicle counting with YOLO and ensemble regression for materials science.
+I also apply **modern control theory** (state space, LQR, Kalman filtering) to robotics and **machine learning** to real problems: image–text semantic search with CLIP, vehicle counting with YOLO and ensemble regression for materials science.
