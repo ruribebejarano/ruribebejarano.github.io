@@ -11,8 +11,14 @@
 {%- endif -%}
 {%- if page.alt_url -%}{%- assign alt_url = page.alt_url -%}{%- endif -%}
 <header>
-  <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm rx-vscode-nav {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
+      <span class="rx-activitybar" aria-hidden="true">
+        <i class="fa-regular fa-copy"></i>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-code-branch"></i>
+        <i class="fa-solid fa-puzzle-piece"></i>
+      </span>
       {% if page.layout != 'about' %}
         <a class="navbar-brand title font-weight-lighter" href="{{ home_url | relative_url }}">
           <span class="font-weight-bold">{{- site.first_name -}}</span>
@@ -41,9 +47,18 @@
             {% else %}
               {% if page.url contains item.url %}{% assign is_active = true %}{% else %}{% assign is_active = false %}{% endif %}
             {% endif %}
-            <li class="nav-item {% if is_active %}active{% endif %}">
+            {%- case forloop.index -%}
+              {%- when 1 -%}{% assign tab_icon = 'fa-regular fa-file-lines' %}{% assign tab_tone = 'cyan' %}
+              {%- when 2 -%}{% assign tab_icon = 'fa-solid fa-folder-open' %}{% assign tab_tone = 'green' %}
+              {%- when 3 -%}{% assign tab_icon = 'fa-solid fa-book' %}{% assign tab_tone = 'violet' %}
+              {%- when 4 -%}{% assign tab_icon = 'fa-brands fa-git-alt' %}{% assign tab_tone = 'green' %}
+              {%- else -%}{% assign tab_icon = 'fa-solid fa-file-pdf' %}{% assign tab_tone = 'pink' %}
+            {%- endcase -%}
+            <li class="nav-item rx-tab {% if is_active %}active{% endif %}">
               <a class="nav-link" href="{{ item.url | relative_url }}">
+                <i class="{{ tab_icon }} rx-tab-icon {{ tab_tone }}" aria-hidden="true"></i>
                 {{- item.title -}}
+                <span class="rx-tab-close" aria-hidden="true">×</span>
                 {% if is_active %}<span class="sr-only">(current)</span>{% endif %}
               </a>
             </li>
@@ -80,4 +95,39 @@
       </div>
     </progress>
   {% endif %}
+
+  {%- comment -%} Barra de estado estilo extensión ESP-IDF para VS Code {%- endcomment -%}
+  {% if lang == 'en' %}
+    {% assign cv_url = '/en/cv/' %}
+    {% assign projects_url = '/en/projects/' %}
+  {% else %}
+    {% assign cv_url = '/cv/' %}
+    {% assign projects_url = '/projects/' %}
+  {% endif %}
+  <div class="rx-statusbar" role="contentinfo" aria-label="Barra de estado">
+    <div class="rx-statusbar-side">
+      <span class="rx-sb-item" title="Rama">
+        <i class="fa-solid fa-code-branch" aria-hidden="true"></i> main
+      </span>
+      <span class="rx-sb-item" title="Objetivo de compilación">
+        <i class="fa-solid fa-microchip" aria-hidden="true"></i> ESP32 · ESP-IDF
+      </span>
+      <span class="rx-sb-item rx-sb-hide-sm" title="Puerto serie (decorativo)">
+        <i class="fa-solid fa-plug" aria-hidden="true"></i> UART
+      </span>
+    </div>
+    <div class="rx-statusbar-side rx-statusbar-end">
+      {% if site.data.socials.github_username %}
+        <a class="rx-sb-item rx-sb-link" href="https://github.com/{{ site.data.socials.github_username }}" title="Build · ver código fuente en GitHub">
+          <i class="fa-solid fa-hammer" aria-hidden="true"></i> Build
+        </a>
+      {% endif %}
+      <a class="rx-sb-item rx-sb-link" href="{{ cv_url | relative_url }}" title="Flash · ver CV">
+        <i class="fa-solid fa-bolt" aria-hidden="true"></i> Flash
+      </a>
+      <a class="rx-sb-item rx-sb-link" href="{{ projects_url | relative_url }}" title="Monitor · ver proyectos">
+        <i class="fa-solid fa-desktop" aria-hidden="true"></i> Monitor
+      </a>
+    </div>
+  </div>
 </header>
