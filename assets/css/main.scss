@@ -119,6 +119,10 @@ html[data-theme="dark"] {
   --global-newsletter-text-color: var(--rx-text);
 }
 
+/* El sitio es siempre oscuro: se oculta el selector de tema */
+#light-toggle,
+.toggle-container { display: none !important; }
+
 html { scroll-behavior: smooth; }
 
 body {
