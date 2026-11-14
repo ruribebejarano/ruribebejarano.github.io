@@ -3,10 +3,10 @@ layout: page
 title: projects
 permalink: /en/projects/
 lang: en
-description: Projects in embedded systems, IoT, control, intelligent transportation and machine learning.
+description: Projects in embedded systems, IoT, hardware design, control, intelligent transportation and machine learning.
 nav: false
 nav_order: 1
-display_categories: [IoT and embedded systems, control and robotics, artificial intelligence]
+display_categories: [IoT and embedded systems, hardware design and PCB, control and robotics, artificial intelligence]
 horizontal: false
 ---
 

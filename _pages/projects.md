@@ -2,10 +2,10 @@
 layout: page
 title: proyectos
 permalink: /projects/
-description: Proyectos de sistemas embebidos, IoT, transporte inteligente y aprendizaje automático.
+description: Proyectos de sistemas embebidos, IoT, diseño de hardware, transporte inteligente y aprendizaje automático.
 nav: true
 nav_order: 1
-display_categories: [IoT y sistemas embebidos, control y robótica, inteligencia artificial]
+display_categories: [IoT y sistemas embebidos, diseño de hardware y PCB, control y robótica, inteligencia artificial]
 horizontal: false
 ---
 
